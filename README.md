@@ -6,6 +6,8 @@ Kyatatsu: Japanese for footstool. This module is named thus as a lightweight, no
 
 > **Requires Node.js 18+ and is published as an ES module (`"type": "module"`).**
 
+NOTE: this project is stale and has not been updated except for dependencies and ESM syntax. You are welcome to use it as you see fit, but there may be better alternatives out there.
+
 ## Installation
 
 ```sh
