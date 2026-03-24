@@ -1,19 +1,19 @@
-const kyatatsu = require('../index.js')
+import kyatatsu from '../index.js'
 
-let schema = {
-    subject: {
-        required: true,
-        type: 'ref'
-    },
-    date: {
-        default: () => new Date()
-    },
-    update: {
-        required: true
-    }
+const schema = {
+  subject: {
+    required: true,
+    type: 'ref'
+  },
+  date: {
+    default: () => new Date()
+  },
+  update: {
+    required: true
+  }
 }
 
 kyatatsu.registerModel('History', schema)
-let History = kyatatsu.model('History', schema)
+const History = kyatatsu.model('History')
 
-module.exports = History
+export default History

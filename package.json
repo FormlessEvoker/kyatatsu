@@ -2,15 +2,14 @@
   "name": "kyatatsu",
   "version": "2.0.3",
   "description": "A javascript library for managing data models and interfacing with Couchbase buckets.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "test": "node --test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MellowCobra/kyatatsu.git"
+    "url": "git+https://github.com/FormlessEvoker/kyatatsu.git"
   },
   "keywords": [
     "couchbase",
@@ -18,19 +17,14 @@
     "javascript",
     "node"
   ],
-  "author": "Grayson Dubois @MellowCobra",
+  "author": "Grayson Dubois",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MellowCobra/kyatatsu/issues"
+    "url": "https://github.com/FormlessEvoker/kyatatsu/issues"
   },
-  "homepage": "https://github.com/MellowCobra/kyatatsu#readme",
-  "devDependencies": {
-    "mocha": "^9.1.3"
-  },
+  "homepage": "https://github.com/FormlessEvoker/kyatatsu#readme",
   "dependencies": {
-    "couchbase": "^4.2.2",
-    "uuid": "^3.1.0",
-    "snyk": "^1.189.0"
-  },
-  "snyk": true
+    "couchbase": "^4.6.1",
+    "uuid": "^13.0.0"
+  }
 }

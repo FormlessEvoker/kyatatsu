@@ -1,63 +1,41 @@
-const kyatatsu = require('../index.js')
+import kyatatsu from '../index.js'
 
-let schema = {
-    name: {
-        required: true
-    },
-    dob: {
-        required: false,
-        default: () => new Date()
-    },
-    sex: {
-        required: false
-    }
+const schema = {
+  name: {
+    required: true
+  },
+  dob: {
+    required: false,
+    default: () => new Date()
+  },
+  sex: {
+    required: false
+  }
 }
 
 kyatatsu.registerModel('Person', schema)
-let Person = kyatatsu.model('Person')
+const Person = kyatatsu.model('Person')
 
-Person.createNew = function(opts) {
-    return new Promise( (resolve, reject) => {
-        let newPerson = {
-            name: opts.name,
-            dob: opts.dob,
-            sex: opts.sex || 'male'
-        }
+Person.createNew = async function (opts) {
+  const newPerson = {
+    name: opts.name,
+    dob: opts.dob,
+    sex: opts.sex || 'male'
+  }
 
-        Person.create(newPerson).then( person => {
-            const History = require('./history.js')
-            History.create({
-                subject: person,
-                update: person
-            }).then( history => {
-                resolve(person)
-            }).catch(err => {
-                reject(err)
-            })
-        }).catch(err => {
-            reject(err)
-        })
-    })
+  const { default: History } = await import('./history.js')
+  const person = await Person.create(newPerson)
+  await History.create({ subject: person, update: person })
+  return person
 }
 
-Person.prototype.update = function(update) {
-    return new Promise( (resolve, reject) => {
-        Object.assign(this, update)
+Person.prototype.update = async function (update) {
+  Object.assign(this, update)
 
-        this.save().then( person => {
-            const History = require('./history.js')
-            History.create({
-                subject: person,
-                update: update
-            }).then( history => {
-                resolve(person)
-            }).catch(err => {
-                reject(err)
-            }) 
-        }).catch(err => {
-            reject(err)
-        })
-    })
+  const { default: History } = await import('./history.js')
+  const person = await this.save()
+  await History.create({ subject: person, update })
+  return person
 }
 
-module.exports = Person
+export default Person
